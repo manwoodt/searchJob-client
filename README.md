@@ -81,3 +81,5 @@ Finally, we’ll add a Resume screen
 - In the sidebar menu, add a button "My resume". When "My resume" is clicked, the "Resume" screen should open
 
 **Check the results:** create a new resume and save it. After saving, a tag block should be filled with the analyzed tags. Go back to the main screen and enter the "Resume" screen again - you should see your resume in View Mode.
+
+💡 [Tap here](https://forms.gle/3J7aRNcar555hcbz5) **to leave your feedback on the project**. Pedago Team really tries to make your educational experience better.
