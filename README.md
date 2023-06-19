@@ -1,9 +1,9 @@
-### Hi!
+# Hi!
 Today we’ll continue our job search project development. In this project, we’ll create the android client application and connect it to our server! We are going to create a resume and find a job using modern network and DI technologies for android. Like on the server side, we’ll use the REST API on the network layer.   
 As for DI, it stands for Dependency Injection, the design pattern which allows the creation of dependent objects outside classes and inject them in different ways wherever they are needed. It’s very useful and allows us to keep program code readable, testable, expandable and reusable.  
 Also, we'll use some architecture principles we've spoken about on Team00 and Day06. The Android app architecture uses SOLID and Clean Architecture ideas, but there are some framework-based interpretations of them. Read the official Android documentation about app architecture, find some articles about Clean Architecture in Android. Get familiar with the terms of Repository, View, Presenter, etc.
 
-## Topics:
+## Themes:
 - Network: android Retrofit2
 - Dependency Injection: Dagger2
 - The architecture of the application
@@ -11,15 +11,19 @@ Also, we'll use some architecture principles we've spoken about on Team00 and Da
 ### Project: android client application for job searching. 
 The application will have two tabs - campaigns and vacancies, screens of their details and a screen for editing resumes.
 
-## Exercises:
+# Exercises:
 
 **Requirement!** Please, make each exercise in a separate project. For example, `Day07/src/exercise1`, `Day07/src/exercise2`, `Day07/src/bonusexercise3`, etc. If the previous exercise is needed for the next one, just copy a project from the previous to the next folder and continue development within the next one.
 
-### Exercise 1: The list of companies
+**Requirement!** Please, don't commit generated files and folders, such as `.idea`, `.out`, `.build`, `.gradle`, etc. In IntelliJ IDEA and Android Studio they are usually marked with orange/brown color. Commit and push to the origin only source code of your app. Delete generated files before commit or better add them to the `.gitignore` file in your project.
+
+**Requirement!** There is no need to download gradle. Please, use the IDE embedded one.
+
+## Exercise 1: The list of companies
 Let’s create our project and add a list of companies.
 - Create android application project
 - To work with data, add the Retrofit2 library
-- Connect HTTP client to the project. Use Dagger2 to implement DI in the project, starting with the HTTP client. See an example in the Code Samples directory.
+- Connect HTTP client to the project. Use Dagger2 to implement DI in the project, starting with the HTTP client. See an example in the `codesamples`  directory.
 - Add a logger and timeouts to the HTTP client
 - Add entities to the model to work with a list of companies
 - Add a screen with two tabs: "Companies" and "Vacancies". Add a list of companies to the "Companies" tab. The "Vacancies" tab is empty. List items must represent a name and a field of activity of a company
@@ -29,7 +33,7 @@ Let’s create our project and add a list of companies.
 - When entering the application, there is a screen with two tabs. The first tab "Companies" is opened by default
 - The "Companies" tab should display a list of companies received from our server (written in the previous day)
 
-### Exercise 2: Company details
+## Exercise 2: Company details
 Now we’ll add a company details screen
 - Add entities to the model to work with company details
 - Create a screen with company details. On the screen, in addition to information about the company, there should be a list of vacancies in this company (for now is empty)
@@ -38,7 +42,7 @@ Now we’ll add a company details screen
 
 **Check the results:** click on an item in the list of companies to open a screen with the details of this company (including a list of its vacancies)
 
-### Exercise 3: The list of vacancies
+## Exercise 3: The list of vacancies
 Here we’ll add a list of vacancies screen
 - Add entities to the model to display a list of all vacancies
 - On the main screen, in the "Vacancies" tab, add a list of vacancies. List items must represent vacancy title, candidate level, salary level, and company name
@@ -46,7 +50,7 @@ Here we’ll add a list of vacancies screen
 
 **Check the results:** on the main screen, when you tap on the "Vacancies" tab, a list of all vacancies should be displayed
 
-### Exercise 4: Vacancy details
+## Exercise 4: Vacancy details
 Now we’ll develop a vacancy details screen.
 - Add entities to the model to work with vacancy details
 - Create a screen with vacancy details.
@@ -60,7 +64,7 @@ Now we’ll develop a vacancy details screen.
 - click on an item in the list of vacancies tab to open a screen with the details of this vacancy
 - click on an item in the list of vacancies in company details to open a screen with the details of this vacancy
 
-### Bonus exercise 5: Resume
+## Bonus exercise 5: Resume
 Finally, we’ll add a Resume screen  
 
 **Create the "Resume" screen:**
