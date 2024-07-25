@@ -1,4 +1,7 @@
 # Hi!
+
+💡 [Tap here](https://new.oprosso.net/p/4cb31ec3f47a4596bc758ea1861fb624) **to leave your feedback on the project**. It's anonymous and will help our team make your educational experience better. We recommend completing the survey immediately after the project.
+
 Today we’ll continue our job search project development. In this project, we’ll create the android client application and connect it to our server! We are going to create a resume and find a job using modern network and DI technologies for android. Like on the server side, we’ll use the REST API on the network layer.   
 As for DI, it stands for Dependency Injection, the design pattern which allows the creation of dependent objects outside classes and inject them in different ways wherever they are needed. It’s very useful and allows us to keep program code readable, testable, expandable and reusable.  
 Also, we'll use some architecture principles we've spoken about on Team00 and Day06. The Android app architecture uses SOLID and Clean Architecture ideas, but there are some framework-based interpretations of them. Read the official Android documentation about app architecture, find some articles about Clean Architecture in Android. Get familiar with the terms of Repository, View, Presenter, etc.
@@ -85,5 +88,3 @@ Finally, we’ll add a Resume screen
 - In the sidebar menu, add a button "My resume". When "My resume" is clicked, the "Resume" screen should open
 
 **Check the results:** create a new resume and save it. After saving, a tag block should be filled with the analyzed tags. Go back to the main screen and enter the "Resume" screen again - you should see your resume in View Mode.
-
-💡 [Tap here](https://forms.gle/3J7aRNcar555hcbz5) **to leave your feedback on the project**. Product Team really tries to make your educational experience better.
