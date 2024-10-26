@@ -1,47 +1,83 @@
-package com.course.ex1
-
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.*
+import com.course.ex1.Company
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Call
+import androidx.compose.material.icons.filled.Home
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.tooling.preview.Preview
-import com.course.ex1.ui.theme.Ex1Theme
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.course.ex1.CompanyViewModel
 
 class MainActivity : ComponentActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         setContent {
-            Ex1Theme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
-            }
+            MyApp()
+        }
+    }
+}
+@Preview
+@Composable
+fun MyApp() {
+    val navController = rememberNavController()
+
+    Scaffold(
+        bottomBar = { BottomNavigationBar(navController) }
+    ) { innerPadding ->
+        NavHost(navController, startDestination = "companies", Modifier.padding(innerPadding)) {
+            composable("companies") { CompaniesScreen(viewModel()) }
+            composable("vacancies") { VacanciesScreen() }
         }
     }
 }
 
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
+fun BottomNavigationBar(navController: NavHostController) {
+    NavigationBar {
+        NavigationBarItem(
+            icon = { Icon(Icons.Filled.Home, contentDescription = null) },
+            label = { Text("Компании") },
+            selected = false,
+            onClick = { navController.navigate("companies") }
+        )
+        NavigationBarItem(
+            icon = { Icon(Icons.Filled.Call, contentDescription = null) },
+            label = { Text("Вакансии") },
+            selected = false,
+            onClick = { navController.navigate("vacancies") }
+        )
+    }
 }
 
-@Preview(showBackground = true)
 @Composable
-fun GreetingPreview() {
-    Ex1Theme {
-        Greeting("Android")
+fun CompaniesScreen(viewModel: CompanyViewModel= viewModel()) {
+    val companies by viewModel.companies.observeAsState(emptyList())
+
+    LazyColumn {
+        items(companies) { company ->
+            CompanyItem(company)
+        }
     }
+}
+
+@Composable
+fun VacanciesScreen() {
+    // Здесь будет ваша логика для вкладки "Вакансии"
+}
+
+@Composable
+fun CompanyItem(company: Company) {
+    Text(text = "${company.name} - ${company.fieldOfActivity}")
 }
