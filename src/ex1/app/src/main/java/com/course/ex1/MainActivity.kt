@@ -1,3 +1,5 @@
+package com.course.ex1
+
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -9,7 +11,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.*
-import com.course.ex1.Company
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Call
 import androidx.compose.material.icons.filled.Home
@@ -17,7 +18,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.course.ex1.CompanyViewModel
 
 class MainActivity : ComponentActivity() {
 
@@ -74,7 +74,7 @@ fun CompaniesScreen(viewModel: CompanyViewModel= viewModel()) {
 
 @Composable
 fun VacanciesScreen() {
-    // Здесь будет ваша логика для вкладки "Вакансии"
+
 }
 
 @Composable

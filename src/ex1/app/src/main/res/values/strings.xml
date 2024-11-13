@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">ex1</string>
+    <string name="Companies">companies\n</string>
 </resources>
