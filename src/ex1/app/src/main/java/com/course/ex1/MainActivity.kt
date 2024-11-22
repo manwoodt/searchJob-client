@@ -1,11 +1,77 @@
 package com.course.ex1
+/*
+com.example.jobapp
+│
+├── data
+│   ├── model         // Модели данных (DTO)
+│   ├── network       // API-интерфейсы и Retrofit
+│   └── repository    // Реализация репозиториев
+│
+├── domain
+│   ├── model         // Бизнес-модели
+│   └── repository    // Интерфейсы репозиториев
+│
+├── presentation
+│   ├── ui            // Компоненты интерфейса Compose
+│   ├── viewmodel     // ViewModel
+│   └── navigation    // Навигация
+│
+└── di                // Dagger Hilt модули
+*/
+
+import android.os.Bundle
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.compose.runtime.ComposeCompilerApi
+import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.course.di.DependencyProvider
+import com.course.ex1.ui.CompaniesScreen
+import com.course.ex1.ui.theme.Ex1Theme
+import com.course.ex1.viewmodel.CompanyViewModel
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
+
+
+class MainActivity : ComponentActivity() {
+
+    private lateinit var viewModel: CompanyViewModel
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        // Вручную создаем ViewModel с зависимостью
+        viewModel = CompanyViewModel(DependencyProvider.getCompanyUseCase)
+
+        setContent {
+            Ex1Theme {
+                CompaniesScreen(viewModel)
+            }
+        }
+    }
+}
+
+
+
+/*
+        setContent {
+            Ex1Theme {
+                val viewModel: CompaniesViewModel = viewModel()
+                val companies = viewModel.companies.observeAsState(emptyList())
+                CompaniesScreen(companies = companies.value)
+            }
+        }
+ */
+
+ /*
+
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -18,6 +84,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.course.ex1.viewmodel.CompanyViewModel
 
 class MainActivity : ComponentActivity() {
 
@@ -62,7 +129,7 @@ fun BottomNavigationBar(navController: NavHostController) {
 }
 
 @Composable
-fun CompaniesScreen(viewModel: CompanyViewModel= viewModel()) {
+fun CompaniesScreen(viewModel: CompanyViewModel = viewModel()) {
     val companies by viewModel.companies.observeAsState(emptyList())
 
     LazyColumn {
@@ -81,3 +148,5 @@ fun VacanciesScreen() {
 fun CompanyItem(company: Company) {
     Text(text = "${company.name} - ${company.fieldOfActivity}")
 }
+
+*/

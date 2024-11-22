@@ -1,17 +1,13 @@
-package com.course.ex1
+package com.course.domain.model
 
-import kotlinx.serialization.*
-
-@Serializable
 data class Company(
     val id:Int,
     val name: String,
     val fieldOfActivity: String,
-    val vacancies: List<Vacancy> ,
+  //  val vacancies: List<Vacancy>,
     val contacts: String
 )
 
-@Serializable
 data class Vacancy(
     val id: Int,
     val profession: String,

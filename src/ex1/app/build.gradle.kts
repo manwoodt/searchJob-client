@@ -3,6 +3,8 @@ plugins {
     alias(libs.plugins.jetbrains.kotlin.android)
     kotlin("plugin.serialization") version "2.0.0"
     alias(libs.plugins.compose.compiler)
+//    id("kotlin-kapt")
+//    id ("com.google.dagger.hilt.android")
 }
 
 android {
@@ -52,9 +54,17 @@ android {
 }
 
 dependencies {
-    implementation ("com.squareup.retrofit2:retrofit:2.11.0")
-    implementation ("com.squareup.retrofit2:converter-gson:2.11.0")
-    implementation (libs.kotlinx.serialization.json)
+    implementation(project(":data"))
+    implementation(project(":domain"))
+
+//    implementation (libs.retrofit)
+//    implementation (libs.converter.gson)
+//    implementation (libs.kotlinx.serialization.json)
+    implementation ("androidx.lifecycle:lifecycle-runtime-compose:2.6.0") // Для collectAsStateWithLifecycle
+    implementation ("androidx.lifecycle:lifecycle-livedata-ktx:2.6.0") // Для LiveData
+    implementation ("androidx.lifecycle:lifecycle-runtime-ktx:2.6.0") // Для ViewModel и жизненного цикла
+    implementation (libs.dagger)
+    implementation (libs.hilt.android)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
@@ -66,6 +76,7 @@ dependencies {
     implementation(libs.androidx.navigation.compose)
     implementation(libs.androidx.navigation.runtime.ktx)
     implementation(libs.androidx.runtime.livedata)
+    implementation(project(":di"))
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
