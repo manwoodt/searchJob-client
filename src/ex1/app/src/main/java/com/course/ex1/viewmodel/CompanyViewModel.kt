@@ -1,5 +1,7 @@
 package com.course.ex1.viewmodel
 
+// мостик между UI и domain
+
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -85,11 +87,16 @@ class CompanyViewModel (
     private val _companies = MutableLiveData<List<Company>>()
     val companies: LiveData<List<Company>> = _companies
 
+    private val _isLoading = MutableLiveData<Boolean>()
+    val isLoading: LiveData<Boolean> = _isLoading
+
     init {
         loadCompanies()
     }
+
     // Запрос данных через UseCase
     private fun loadCompanies() {
+        _isLoading.value = true
         viewModelScope.launch {
 
             try {
@@ -97,6 +104,9 @@ class CompanyViewModel (
             } catch (e: Exception) {
                 Log.e("CompanyViewModel", "Error loading companies", e)
                 _companies.value = emptyList() // Ошибка, возвращаем пустой список
+            }
+            finally {
+                _isLoading.value = false
             }
 
         }

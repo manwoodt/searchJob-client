@@ -33,25 +33,20 @@ import com.course.ex1.viewmodel.CompanyViewModel
 //        }
 //    }
 //}
-/*
-@Composable
-fun CompaniesScreen(companies: List<Company>) {
-    LazyColumn(modifier = Modifier.fillMaxSize().padding(16.dp)) {
-        items(companies.size) { index ->
-            val company = companies[index]
-            BasicText(text = "${company.name} - ${company.fieldOfActivity}")
-        }
-    }
-}
-*/
+
 @Composable
 fun CompaniesScreen(viewModel: CompanyViewModel) {
     // Подписываемся на поток данных из ViewModel
     val companies by viewModel.companies.observeAsState(emptyList())
-//    if(isLoading())
-    LazyColumn(modifier = Modifier.fillMaxSize().padding(16.dp)) {
-        items(companies) { company ->
-            CompanyItem(company)
+    val isLoading by viewModel.isLoading.observeAsState(false)
+
+    if (isLoading)
+        CircularProgressIndicator()
+    else {
+        LazyColumn(modifier = Modifier.fillMaxSize().padding(16.dp)) {
+            items(companies) { company ->
+                CompanyItem(company)
+            }
         }
     }
 }
