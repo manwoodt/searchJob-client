@@ -1,10 +1,10 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
-    kotlin("plugin.serialization") version "2.0.0"
     alias(libs.plugins.compose.compiler)
-//    id("kotlin-kapt")
-//    id ("com.google.dagger.hilt.android")
+//    alias(libs.plugins.ksp)
+    alias(libs.plugins.dagger.hilt)
+    id("kotlin-kapt")
 }
 
 android {
@@ -44,7 +44,7 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.1"
+        kotlinCompilerExtensionVersion = "1.5.2"
     }
     packaging {
         resources {
@@ -57,14 +57,16 @@ dependencies {
     implementation(project(":data"))
     implementation(project(":domain"))
 
-//    implementation (libs.retrofit)
-//    implementation (libs.converter.gson)
-//    implementation (libs.kotlinx.serialization.json)
-    implementation ("androidx.lifecycle:lifecycle-runtime-compose:2.6.0") // Для collectAsStateWithLifecycle
-    implementation ("androidx.lifecycle:lifecycle-livedata-ktx:2.6.0") // Для LiveData
-    implementation ("androidx.lifecycle:lifecycle-runtime-ktx:2.6.0") // Для ViewModel и жизненного цикла
+
+    implementation (libs.androidx.lifecycle.runtime.compose) // Для collectAsStateWithLifecycle
+    implementation (libs.androidx.lifecycle.livedata.ktx) // Для LiveData
+    implementation (libs.androidx.lifecycle.runtime.ktx.v260) // Для ViewModel и жизненного цикла
     implementation (libs.dagger)
-    implementation (libs.hilt.android)
+    implementation(libs.hilt)
+    kapt(libs.hilt.android.compiler)
+    implementation(libs.androidx.hilt)
+  //  implementation("com.google.dagger:hilt-android:2.44") // Зависимость Hilt для Android
+  //  kapt("com.google.dagger:hilt-compiler:2.44") // Компилятор для аннотаций Hilt
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
@@ -76,7 +78,6 @@ dependencies {
     implementation(libs.androidx.navigation.compose)
     implementation(libs.androidx.navigation.runtime.ktx)
     implementation(libs.androidx.runtime.livedata)
-    implementation(project(":di"))
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

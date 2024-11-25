@@ -2,6 +2,8 @@ plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.jetbrains.kotlin.android)
     kotlin("plugin.serialization") version "2.0.0"
+    alias(libs.plugins.dagger.hilt)
+    id("kotlin-kapt")
 }
 
 android {
@@ -34,7 +36,12 @@ android {
 }
 
 dependencies {
+    implementation(libs.hilt)
+    kapt(libs.hilt.android.compiler)
+    implementation(libs.androidx.hilt)
+
     implementation(project(":domain"))
+    implementation (libs.dagger)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)

@@ -18,21 +18,8 @@ import com.course.domain.model.Company
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.course.ex1.viewmodel.CompanyViewModel
 
-//@Composable
-//fun CompaniesScreen(viewModel: CompaniesViewModel) {
-//    val companies by viewModel.companies
-//    val isLoading by viewModel.isLoading
-//
-//    if (isLoading) {
-//        CircularProgressIndicator()
-//    } else {
-//        LazyColumn {
-//            items(companies) { company ->
-//                Text("${company.name} (${company.activityField})")
-//            }
-//        }
-//    }
-//}
+
+
 
 @Composable
 fun CompaniesScreen(viewModel: CompanyViewModel) {
