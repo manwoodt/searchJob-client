@@ -39,9 +39,13 @@ dependencies {
 
     implementation (libs.dagger)
     implementation(libs.hilt)
+    kapt(libs.hilt.android.compiler)
 
     implementation (libs.retrofit)
 
     implementation(libs.kotlinx.serialization.json)
     implementation (libs.converter.gson)
+
+    implementation(libs.okhttp)
+    implementation(libs.logging.interceptor)
 }
