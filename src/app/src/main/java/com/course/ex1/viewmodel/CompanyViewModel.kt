@@ -24,6 +24,9 @@ class CompanyViewModel @Inject constructor(
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
 
+    private val _errorMessage = MutableLiveData<String?>()
+    val errorMessage: LiveData<String?> = _errorMessage
+
     init {
         loadCompanies()
     }
@@ -35,7 +38,9 @@ class CompanyViewModel @Inject constructor(
 
             try {
                 _companies.value = getCompaniesUseCase()
+                _errorMessage.value = null // Сбрасываем сообщение об ошибке
             } catch (e: Exception) {
+                _errorMessage.value = "Error loading companies ${e.message}"
                 Log.e("CompanyViewModel", "Error loading companies", e)
                 _companies.value = emptyList() // Ошибка, возвращаем пустой список
             }
