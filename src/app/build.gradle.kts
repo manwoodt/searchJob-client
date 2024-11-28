@@ -2,7 +2,6 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
     alias(libs.plugins.compose.compiler)
-//    alias(libs.plugins.ksp)
     alias(libs.plugins.dagger.hilt)
     id("kotlin-kapt")
 }
@@ -54,19 +53,16 @@ android {
 }
 
 dependencies {
-    implementation(project(":data"))
     implementation(project(":domain"))
-
+    implementation(project(":data"))
 
     implementation (libs.androidx.lifecycle.runtime.compose) // Для collectAsStateWithLifecycle
-    implementation (libs.androidx.lifecycle.livedata.ktx) // Для LiveData
+    implementation (libs.androidx.lifecycle.livedata.ktx)
     implementation (libs.androidx.lifecycle.runtime.ktx.v260) // Для ViewModel и жизненного цикла
     implementation (libs.dagger)
     implementation(libs.hilt)
     kapt(libs.hilt.android.compiler)
     implementation(libs.androidx.hilt)
-  //  implementation("com.google.dagger:hilt-android:2.44") // Зависимость Hilt для Android
-  //  kapt("com.google.dagger:hilt-compiler:2.44") // Компилятор для аннотаций Hilt
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)

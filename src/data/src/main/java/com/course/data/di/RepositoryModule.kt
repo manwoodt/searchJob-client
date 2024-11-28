@@ -1,4 +1,4 @@
-package com.course.ex1.di
+package com.course.data.di
 
 import com.course.data.network.ApiService
 import com.course.data.repository.CompanyRepositoryImpl

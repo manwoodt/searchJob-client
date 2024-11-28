@@ -24,7 +24,7 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "ex1"
+rootProject.name = "searchJob"
 include(":app")
 include(":data")
 include(":domain")
