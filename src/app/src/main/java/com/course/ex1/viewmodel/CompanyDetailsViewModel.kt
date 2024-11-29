@@ -2,15 +2,12 @@ package com.course.ex1.viewmodel
 
 // мостик между UI и domain
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.course.domain.model.Company
 import com.course.domain.model.CompanyInfo
 import com.course.domain.model.Vacancy
-import com.course.domain.usecase.GetCompaniesUseCase
 import com.course.domain.usecase.GetCompanyDetailsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
