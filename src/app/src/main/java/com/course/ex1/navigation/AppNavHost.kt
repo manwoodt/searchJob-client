@@ -11,6 +11,8 @@ import com.course.ex1.ui.VacanciesScreen
 import com.course.ex1.viewmodel.CompanyViewModel
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.course.ex1.ui.CompanyDetailsScreen
+import com.course.ex1.viewmodel.CompanyDetailsViewModel
+import com.course.ex1.viewmodel.VacancyViewModel
 
 @Composable
 fun AppNavHost(
@@ -34,13 +36,18 @@ fun AppNavHost(
             )
         }
         composable("companyInfo/{companyId}") { backStackEntry ->
+            val companyDetailViewModel:CompanyDetailsViewModel = hiltViewModel()
+
             val companyId = backStackEntry.arguments?.getString("companyId")?.toIntOrNull()
+
             if (companyId != null) {
                // Log.d("Navigation", "Extracted companyId: $companyId")
-                CompanyDetailsScreen(companyId = companyId, viewModel = hiltViewModel())
+                CompanyDetailsScreen(companyDetailViewModel, companyId)
             }
         }
 
-        composable("vacancies") { VacanciesScreen() }
+        composable("vacancies") {
+            val vacancyViewModel: VacancyViewModel = hiltViewModel()
+            VacanciesScreen(vacancyViewModel,{}) }
     }
 }

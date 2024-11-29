@@ -8,5 +8,6 @@ data class VacancyDto(
     val profession: String,
     val level: String,
     val salary: Int,
-    val description: String
+    val description: String,
+    val companyId: Int
 )

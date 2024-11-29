@@ -1,8 +1,8 @@
 package com.course.data.di
 
 import com.course.data.network.ApiService
-import com.course.data.repository.CompanyRepositoryImpl
-import com.course.domain.repository.CompanyRepository
+import com.course.data.repository.RepositoryImpl
+import com.course.domain.repository.Repository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -13,7 +13,7 @@ import dagger.hilt.components.SingletonComponent
 object RepositoryModule {
 
     @Provides
-    fun provideCompanyRepository(apiService: ApiService): CompanyRepository {
-        return CompanyRepositoryImpl(apiService)
+    fun provideCompanyRepository(apiService: ApiService): Repository {
+        return RepositoryImpl(apiService)
     }
 }

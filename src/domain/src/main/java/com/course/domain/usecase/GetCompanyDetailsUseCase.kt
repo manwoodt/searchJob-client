@@ -1,15 +1,14 @@
 package com.course.domain.usecase
 
-import com.course.domain.model.Company
 import com.course.domain.model.CompanyInfo
-import com.course.domain.repository.CompanyRepository
+import com.course.domain.repository.Repository
 import javax.inject.Inject
 
 class GetCompanyDetailsUseCase @Inject constructor(
-    private val companyRepository: CompanyRepository
+    private val repository: Repository
 ) {
 
     suspend operator fun invoke(companyId: Int): CompanyInfo {
-        return companyRepository.getCompanyDetails(companyId)
+        return repository.getCompanyDetails(companyId)
     }
 }

@@ -4,21 +4,32 @@ import com.course.data.mappers.toDomainModel
 import com.course.data.network.ApiService
 import com.course.domain.model.Company
 import com.course.domain.model.CompanyInfo
-import com.course.domain.repository.CompanyRepository
+import com.course.domain.model.Vacancy
+import com.course.domain.repository.Repository
 import javax.inject.Inject
 
-class CompanyRepositoryImpl @Inject constructor(
+class RepositoryImpl @Inject constructor(
     private val apiService: ApiService,
-) : CompanyRepository {
+) : Repository {
 
     override suspend fun getCompanies(): List<Company> {
         return apiService.getCompanies().map { it.toDomainModel() }
-        }
+    }
 
     override suspend fun getCompanyDetails(id: Int): CompanyInfo {
         return apiService.getCompanyDetails(id).toDomainModel()
     }
 
+    override suspend fun getVacancies(): List<Vacancy> {
+        val vacanciesDto = apiService.getVacancies()
+
+        return vacanciesDto.map { vacancyDto ->
+            vacancyDto.toDomainModel("Unknown")
+        }
+
+
     }
+
+}
 
 

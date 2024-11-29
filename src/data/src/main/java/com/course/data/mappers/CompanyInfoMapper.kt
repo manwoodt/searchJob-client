@@ -9,7 +9,7 @@ fun CompanyInfoDto.toDomainModel(): CompanyInfo {
         id = this.id,
         name = this.name,
         fieldOfActivity = this.fieldOfActivity,
-        vacancies = this.vacancies.map { it.toDomainModel() },
+        vacancies = this.vacancies.map { it.toDomainModel("Unknown") },
         contacts = this.contacts
     )
 }

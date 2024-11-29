@@ -32,23 +32,6 @@ when {
 }
 }
 
-// Экран загрузки
-@Composable
-fun LoadingScreen() {
-    Box(
-        modifier = Modifier.fillMaxSize(),
-        contentAlignment = Alignment.Center
-    ) {
-        CircularProgressIndicator()
-    }
-}
-
-// Экран ошибки
-@Composable
-fun ErrorScreen(errorMessage: String) {
-    Toast.makeText(LocalContext.current, errorMessage, Toast.LENGTH_LONG).show()
-}
-
 // Список компаний
 @Composable
 fun CompaniesList(companies: List<Company>, onCompanyClick: (Int) -> Unit) {
