@@ -5,6 +5,7 @@ import com.course.data.network.ApiService
 import com.course.domain.model.Company
 import com.course.domain.model.CompanyInfo
 import com.course.domain.model.Vacancy
+import com.course.domain.model.VacancyDetails
 import com.course.domain.repository.Repository
 import javax.inject.Inject
 
@@ -26,8 +27,10 @@ class RepositoryImpl @Inject constructor(
         return vacanciesDto.map { vacancyDto ->
             vacancyDto.toDomainModel("Unknown")
         }
+    }
 
-
+    override suspend fun getVacancyDetails(id: Int): VacancyDetails {
+        return apiService.getVacancyDetails(id).toDomainModel()
     }
 
 }

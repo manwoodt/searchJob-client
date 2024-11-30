@@ -9,19 +9,21 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.course.domain.model.Company
 import com.course.domain.model.Vacancy
+import com.course.domain.model.VacancyDetails
 import com.course.domain.usecase.GetCompaniesUseCase
 import com.course.domain.usecase.GetVacanciesUseCase
+import com.course.domain.usecase.GetVacancyDetailsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class VacancyViewModel @Inject constructor(
-    private val getVacanciesUseCase: GetVacanciesUseCase
+class VacancyDetailsViewModel  @Inject constructor(
+    private val getVacancyDetailsUseCase: GetVacancyDetailsUseCase
 ) : ViewModel() {
 
-    private val _vacancies = MutableLiveData<List<Vacancy>>()
-    val vacancies: LiveData<List<Vacancy>> = _vacancies
+    private val _vacancyDetails = MutableLiveData<VacancyDetails>()
+    val vacancyDetails: LiveData<VacancyDetails> = _vacancyDetails
 
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
@@ -29,22 +31,15 @@ class VacancyViewModel @Inject constructor(
     private val _errorMessage = MutableLiveData<String?>()
     val errorMessage: LiveData<String?> = _errorMessage
 
-    init {
-        loadVacancies()
-    }
 
     // Запрос данных через UseCase
-    private fun loadVacancies() {
-        _isLoading.value = true
+    fun loadVacancyDetails(vacancyId:Int) {
         viewModelScope.launch {
-
+            _isLoading.value = true
             try {
-                _vacancies.value = getVacanciesUseCase()
-                _errorMessage.value = null // Сбрасываем сообщение об ошибке
+                _vacancyDetails.value = getVacancyDetailsUseCase(vacancyId)
             } catch (e: Exception) {
-                _errorMessage.value = "Error loading vacancies ${e.message}"
-                Log.e("VacancyViewModel", "Error loading vacancies", e)
-                _vacancies.value = emptyList() // Ошибка, возвращаем пустой список
+                _errorMessage.value = "Error loading vacancy details ${e.message}"
             }
             finally {
                 _isLoading.value = false

@@ -19,7 +19,7 @@ import com.course.ex1.viewmodel.VacancyViewModel
 
 @Composable
 fun VacanciesScreen(viewModel: VacancyViewModel, onCompanyClick: (Int) -> Unit) {
-    val vacancies by viewModel.companies.observeAsState(emptyList())
+    val vacancies by viewModel.vacancies.observeAsState(emptyList())
     val isLoading by viewModel.isLoading.observeAsState(false)
     val errorMessage by viewModel.errorMessage.observeAsState(null)
 
