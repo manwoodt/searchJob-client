@@ -18,7 +18,7 @@ import com.course.ex1.viewmodel.VacancyViewModel
 
 
 @Composable
-fun VacanciesScreen(viewModel: VacancyViewModel, onCompanyClick: (Int) -> Unit) {
+fun VacanciesScreen(viewModel: VacancyViewModel, onVacancyClick: (Int) -> Unit) {
     val vacancies by viewModel.vacancies.observeAsState(emptyList())
     val isLoading by viewModel.isLoading.observeAsState(false)
     val errorMessage by viewModel.errorMessage.observeAsState(null)
@@ -29,7 +29,7 @@ fun VacanciesScreen(viewModel: VacancyViewModel, onCompanyClick: (Int) -> Unit) 
         errorMessage != null ->
             ErrorScreen(errorMessage!!)
         else ->
-            VacanciesList(vacancies, onCompanyClick)
+            VacanciesList(vacancies, onVacancyClick)
 
     }
 }
@@ -37,24 +37,25 @@ fun VacanciesScreen(viewModel: VacancyViewModel, onCompanyClick: (Int) -> Unit) 
 
 // Список компаний
 @Composable
-fun VacanciesList(vacancies: List<Vacancy>, onCompanyClick: (Int) -> Unit) {
+fun VacanciesList(vacancies: List<Vacancy>, onVacancyClick: (Int) -> Unit) {
     LazyColumn(
         modifier = Modifier
             .fillMaxSize()
             .padding(16.dp)
     ) {
         items(vacancies) { vacancy ->
-            VacancyItem(vacancy, onCompanyClick)
+            VacancyItem(vacancy, onVacancyClick)
         }
     }
 }
 
 @Composable
-fun VacancyItem(vacancy: Vacancy, onCompanyClick: (Int) -> Unit) {
+fun VacancyItem(vacancy: Vacancy, onVacancyClick: (Int) -> Unit) {
     Column(
         modifier = Modifier
             .fillMaxSize()
             .padding(16.dp)
+            .clickable { onVacancyClick(vacancy.id)}
     ) {
         Text(
             text = "Название - ${vacancy.profession}"

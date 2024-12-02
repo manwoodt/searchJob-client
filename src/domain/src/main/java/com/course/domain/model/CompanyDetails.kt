@@ -1,7 +1,7 @@
 package com.course.domain.model
 
 
-data class CompanyInfo(
+data class CompanyDetails(
     val id:Int,
     val name: String,
     val fieldOfActivity: String,
