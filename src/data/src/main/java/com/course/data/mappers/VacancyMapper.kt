@@ -3,9 +3,9 @@ package com.course.data.mappers
 import com.course.data.model.VacancyDto
 import com.course.domain.model.Vacancy
 
-fun VacancyDto.toDomainModel(companyName:String): Vacancy {
+fun VacancyDto.toDomainModel(companyName :String = "Unknown"): Vacancy {
     return Vacancy(
-        id = this.id,
+        vacancyId = this.vacancyId,
         profession = this.profession,
         level = this.level,
         salary = "${this.salary} ₽",

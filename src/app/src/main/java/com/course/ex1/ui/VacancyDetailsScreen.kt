@@ -36,7 +36,7 @@ fun VacancyDetailsScreen(
                 Text("Зарплата: ${details.salary}")
                 Text("Уровень: ${details.level}")
                 Spacer(modifier = Modifier.height(16.dp))
-                Button(onClick = { navController.navigate("companyInfo/${details.companyId}") }) {
+                Button(onClick = { navController.navigate("companyInfo/${details.companyName}") }) {
                     Text("Перейти в компанию: ${details.companyName}")
                 }
             }

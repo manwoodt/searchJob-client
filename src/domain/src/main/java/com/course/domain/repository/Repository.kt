@@ -10,5 +10,5 @@ interface Repository {
     suspend fun getCompanyDetails(id:Int):CompanyDetails
 
     suspend fun getVacancies(): List<Vacancy>
-    suspend fun getVacancyDetails(id:Int):VacancyDetails
+    suspend fun getVacancyDetails(id:Int):Vacancy
 }

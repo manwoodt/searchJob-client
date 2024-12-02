@@ -33,20 +33,22 @@ fun CompanyDetailsScreen(
     viewModel: CompanyDetailsViewModel = hiltViewModel()
 ) {
     val companyDetails by viewModel.companyDetails.observeAsState()
-    val vacancies by viewModel.vacancies.observeAsState(emptyList())
     val isLoading by viewModel.isLoading.observeAsState(false)
     val errorMessage by viewModel.errorMessage.observeAsState(null)
+
 
     LaunchedEffect(companyId) {
         viewModel.loadCompanyDetails(companyId)
     }
 
     if (isLoading) {
+
         CircularProgressIndicator(modifier = Modifier.fillMaxSize())
     } else if (errorMessage != null) {
         Log.e("Error", errorMessage!!)
         Toast.makeText(LocalContext.current, errorMessage, Toast.LENGTH_SHORT).show()
     } else {
+        println("companyDetails внутри CompanyDetailsScreen $companyDetails")
         companyDetails?.let { details ->
             Column(modifier = Modifier.fillMaxSize().padding(16.dp)) {
                 Text(text = details.name, style = MaterialTheme.typography.bodyLarge)
@@ -55,9 +57,9 @@ fun CompanyDetailsScreen(
                 Spacer(modifier = Modifier.height(16.dp))
                 Text(text = "Вакансии:", style = MaterialTheme.typography.bodyLarge)
                 LazyColumn {
-                    items(vacancies) { vacancy ->
-                        Text(text = vacancy.description, modifier = Modifier.clickable {
-                            navController.navigate("vacancyDetails/${vacancy.id}")
+                    items(details.vacancies) { vacancy ->
+                        Text(text = vacancy.profession, modifier = Modifier.clickable {
+                            navController.navigate("vacancyDetails/${vacancy.vacancyId}")
                         })
                     }
                 }

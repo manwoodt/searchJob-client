@@ -47,11 +47,12 @@ fun CompaniesList(companies: List<Company>, onCompanyClick: (Int) -> Unit) {
 }
 @Composable
 fun CompanyItem(company: Company, onCompanyClick: (Int) -> Unit) {
+    println(company.companyId)
     Text(
         text = "${company.name} - ${company.fieldOfActivity}",
         modifier = Modifier
             .padding(8.dp)
-            .clickable { onCompanyClick(company.id) }
+            .clickable { onCompanyClick(company.companyId) }
     )
 
 }

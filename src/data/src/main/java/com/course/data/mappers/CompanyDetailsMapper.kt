@@ -6,10 +6,10 @@ import com.course.domain.model.CompanyDetails
 
 fun CompanyInfoDto.toDomainModel(): CompanyDetails {
     return CompanyDetails(
-        id = this.id,
+        companyId =  this.companyId,
         name = this.name,
         fieldOfActivity = this.fieldOfActivity,
-        vacancies = this.vacancies.map { it.toDomainModel("Unknown") },
+        vacancies = this.vacancies.map { it.toDomainModel(this.name) },
         contacts = this.contacts
     )
 }

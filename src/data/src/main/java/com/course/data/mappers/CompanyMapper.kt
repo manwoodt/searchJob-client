@@ -5,7 +5,7 @@ import com.course.domain.model.Company
 
 fun CompanyDto.toDomainModel():Company{
     return Company(
-        id = this.id,
+        companyId = this.companyId,
         name = this.name,
         fieldOfActivity = this.fieldOfActivity
     )

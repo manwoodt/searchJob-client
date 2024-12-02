@@ -55,7 +55,7 @@ fun VacancyItem(vacancy: Vacancy, onVacancyClick: (Int) -> Unit) {
         modifier = Modifier
             .fillMaxSize()
             .padding(16.dp)
-            .clickable { onVacancyClick(vacancy.id)}
+            .clickable { onVacancyClick(vacancy.vacancyId)}
     ) {
         Text(
             text = "Название - ${vacancy.profession}"

@@ -2,7 +2,7 @@ package com.course.domain.model
 
 
 data class CompanyDetails(
-    val id:Int,
+    val companyId:Int,
     val name: String,
     val fieldOfActivity: String,
     val vacancies: List<Vacancy>,

@@ -7,12 +7,11 @@ import com.course.domain.model.VacancyDetails
 
 fun VacancyDetailsDto.toDomainModel(): VacancyDetails {
     return VacancyDetails(
-        id = this.id,
+        vacancyId = this.vacancyId,
         profession = this.profession,
         level = this.level,
         salary = "${this.salary} ₽",
         description = this.description,
         companyName = companyName,
-        companyId = companyId
     )
 }

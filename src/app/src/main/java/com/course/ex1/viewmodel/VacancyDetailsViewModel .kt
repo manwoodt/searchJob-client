@@ -22,8 +22,8 @@ class VacancyDetailsViewModel  @Inject constructor(
     private val getVacancyDetailsUseCase: GetVacancyDetailsUseCase
 ) : ViewModel() {
 
-    private val _vacancyDetails = MutableLiveData<VacancyDetails>()
-    val vacancyDetails: LiveData<VacancyDetails> = _vacancyDetails
+    private val _vacancyDetails = MutableLiveData<Vacancy>()
+    val vacancyDetails: LiveData<Vacancy> = _vacancyDetails
 
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading

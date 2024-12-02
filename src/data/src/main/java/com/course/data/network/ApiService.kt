@@ -25,5 +25,5 @@ interface ApiService {
     @GET("vacancies/{id}")
     suspend fun getVacancyDetails(
         @Path("id") vacancyId: Int
-    ): VacancyDetailsDto
+    ): VacancyDto
 }

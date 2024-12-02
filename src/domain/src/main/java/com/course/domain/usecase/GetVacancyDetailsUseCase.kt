@@ -8,7 +8,7 @@ import javax.inject.Inject
 class GetVacancyDetailsUseCase @Inject constructor(
     private val repository: Repository,
 ) {
-    suspend operator fun invoke(vacancyId:Int): VacancyDetails {
+    suspend operator fun invoke(vacancyId:Int): Vacancy {
     return repository.getVacancyDetails(vacancyId)
     }
 

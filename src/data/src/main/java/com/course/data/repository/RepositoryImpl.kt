@@ -18,17 +18,33 @@ class RepositoryImpl @Inject constructor(
     }
 
     override suspend fun getCompanyDetails(id: Int): CompanyDetails {
-        return apiService.getCompanyDetails(id).toDomainModel()
+        val vacancies = apiService.getVacancies()
+        val companyDetails = apiService.getCompanyDetails(id).toDomainModel()
+        println("Детали компаний $companyDetails")
+        return companyDetails
     }
 
     override suspend fun getVacancies(): List<Vacancy> {
         val vacanciesDto = apiService.getVacancies()
         return vacanciesDto.map { vacancyDto ->
-            vacancyDto.toDomainModel("Unknown")
+            vacancyDto.toDomainModel()
         }
     }
+    /*
+            val vacancies = repository.getVacancies()
+        val companies = repository.getCompanies()
 
-    override suspend fun getVacancyDetails(id: Int): VacancyDetails {
+        val companyMap = companies.map { it.id to it.name }.toMap()
+
+        return vacancies.map { vacancy ->
+            val companyName = companyMap[vacancy.id] ?: "Неизвестная компания"
+            vacancy.copy(companyName = companyName)
+        }
+     */
+
+
+
+    override suspend fun getVacancyDetails(id: Int): Vacancy {
         return apiService.getVacancyDetails(id).toDomainModel()
     }
 
