@@ -9,9 +9,6 @@ class GetCompaniesUseCase @Inject constructor(
 ) {
 
     suspend operator fun invoke(): List<Company> {
-
-      val companies = repository.getCompanies()
-        println("Компании: $companies")
-        return companies
+        return repository.getCompanies()
     }
 }

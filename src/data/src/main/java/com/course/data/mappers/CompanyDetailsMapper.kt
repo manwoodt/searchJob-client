@@ -1,10 +1,10 @@
 package com.course.data.mappers
 
 
-import com.course.data.model.CompanyInfoDto
+import com.course.data.model.CompanyDetailsDto
 import com.course.domain.model.CompanyDetails
 
-fun CompanyInfoDto.toDomainModel(): CompanyDetails {
+fun CompanyDetailsDto.toDomainModel(): CompanyDetails {
     return CompanyDetails(
         companyId =  this.companyId,
         name = this.name,

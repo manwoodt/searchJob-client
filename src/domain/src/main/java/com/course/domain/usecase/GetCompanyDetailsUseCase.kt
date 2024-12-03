@@ -9,7 +9,6 @@ class GetCompanyDetailsUseCase @Inject constructor(
 ) {
 
     suspend operator fun invoke(companyId: Int): CompanyDetails {
-       val vacancies = repository.getVacancies()
         return repository.getCompanyDetails(companyId )
     }
 }

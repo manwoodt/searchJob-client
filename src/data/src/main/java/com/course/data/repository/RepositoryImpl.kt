@@ -20,32 +20,34 @@ class RepositoryImpl @Inject constructor(
     override suspend fun getCompanyDetails(id: Int): CompanyDetails {
         val vacancies = apiService.getVacancies()
         val companyDetails = apiService.getCompanyDetails(id).toDomainModel()
-        println("Детали компаний $companyDetails")
+        // println("Детали компаний $companyDetails")
         return companyDetails
     }
 
     override suspend fun getVacancies(): List<Vacancy> {
-        val vacanciesDto = apiService.getVacancies()
-        return vacanciesDto.map { vacancyDto ->
-            vacancyDto.toDomainModel()
+
+        // Получаем список краткой информации о компаниях
+        val companies = apiService.getCompanies()
+
+        // Получаем подробную информацию по каждой компании и добавляем вакансии с именами компаний
+        val vacancies = mutableListOf<Vacancy>()
+        for (company in companies) {
+            val companyDetails = getCompanyDetails(company.companyId) // Запрос подробной информации
+            vacancies.addAll(
+                companyDetails.vacancies.map { vacancy ->
+                    vacancy.copy(companyName = companyDetails.name) // Добавляем имя компании в вакансию
+                }
+            )
         }
+        return vacancies
     }
-    /*
-            val vacancies = repository.getVacancies()
-        val companies = repository.getCompanies()
-
-        val companyMap = companies.map { it.id to it.name }.toMap()
-
-        return vacancies.map { vacancy ->
-            val companyName = companyMap[vacancy.id] ?: "Неизвестная компания"
-            vacancy.copy(companyName = companyName)
-        }
-     */
-
-
 
     override suspend fun getVacancyDetails(id: Int): Vacancy {
-        return apiService.getVacancyDetails(id).toDomainModel()
+        val vacancyWithoutCompanyName = apiService.getVacancyDetails(id).toDomainModel()
+        val vacancies = getVacancies()
+        if (id != 0)
+            vacancyWithoutCompanyName.companyName = vacancies[id - 1].companyName
+        return vacancyWithoutCompanyName
     }
 
 }

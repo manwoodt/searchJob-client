@@ -14,9 +14,10 @@ import com.course.ex1.viewmodel.VacancyDetailsViewModel
 fun VacancyDetailsScreen(
     navController: NavHostController,
     vacancyId: Int,
-    viewModel: VacancyDetailsViewModel = hiltViewModel()
+    viewModel: VacancyDetailsViewModel = hiltViewModel(),
 ) {
     val vacancyDetails by viewModel.vacancyDetails.observeAsState()
+    val companies by viewModel.companies.observeAsState()
     val isLoading by viewModel.isLoading.observeAsState(false)
     val errorMessage by viewModel.errorMessage.observeAsState(null)
 
@@ -24,22 +25,34 @@ fun VacancyDetailsScreen(
         viewModel.loadVacancyDetails(vacancyId)
     }
 
-    if (isLoading) {
-        CircularProgressIndicator(modifier = Modifier.fillMaxSize())
-    } else if (errorMessage != null) {
-        Text("Error: $errorMessage")
-    } else {
-        vacancyDetails?.let { details ->
-            Column(modifier = Modifier.padding(16.dp)) {
-                Text("Должность: ${details.profession}", style = MaterialTheme.typography.bodyLarge)
-                Text("Описание: ${details.description}")
-                Text("Зарплата: ${details.salary}")
-                Text("Уровень: ${details.level}")
-                Spacer(modifier = Modifier.height(16.dp))
-                Button(onClick = { navController.navigate("companyInfo/${details.companyName}") }) {
-                    Text("Перейти в компанию: ${details.companyName}")
+    when {
+        isLoading -> LoadingScreen()
+        errorMessage != null -> ErrorScreen(errorMessage!!)
+        else ->
+            vacancyDetails?.let { details ->
+                Column(modifier = Modifier.padding(16.dp)) {
+                    Text(
+                        "Должность: ${details.profession}",
+                        style = MaterialTheme.typography.bodyLarge
+                    )
+                    Text("Описание: ${details.description}")
+                    Text("Зарплата: ${details.salary}")
+                    Text("Уровень: ${details.level}")
+                    Spacer(modifier = Modifier.height(16.dp))
+                    var companyId = 1
+                    for (company in companies!!) {
+                        if (company.name == details.companyName) {
+                            companyId = company.companyId
+                        }
+                    }
+                    Button(onClick = {
+                        navController.navigate(
+                            "companies/${companyId}"
+                        )
+                    }) {
+                        Text("Перейти в компанию: ${details.companyName}")
+                    }
                 }
             }
-        }
     }
 }

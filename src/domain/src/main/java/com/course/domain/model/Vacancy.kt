@@ -7,5 +7,5 @@ data class Vacancy(
     val level: String,
     val salary: String,
     val description: String,
-    val companyName: String
+    var companyName: String
 )

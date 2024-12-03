@@ -42,13 +42,12 @@ fun CompanyDetailsScreen(
     }
 
     if (isLoading) {
-
-        CircularProgressIndicator(modifier = Modifier.fillMaxSize())
+        LoadingScreen()
     } else if (errorMessage != null) {
         Log.e("Error", errorMessage!!)
         Toast.makeText(LocalContext.current, errorMessage, Toast.LENGTH_SHORT).show()
     } else {
-        println("companyDetails внутри CompanyDetailsScreen $companyDetails")
+     //   println("companyDetails внутри CompanyDetailsScreen $companyDetails")
         companyDetails?.let { details ->
             Column(modifier = Modifier.fillMaxSize().padding(16.dp)) {
                 Text(text = details.name, style = MaterialTheme.typography.bodyLarge)
@@ -59,7 +58,8 @@ fun CompanyDetailsScreen(
                 LazyColumn {
                     items(details.vacancies) { vacancy ->
                         Text(text = vacancy.profession, modifier = Modifier.clickable {
-                            navController.navigate("vacancyDetails/${vacancy.vacancyId}")
+                            println("Id вакансии ${vacancy.vacancyId}")
+                            navController.navigate("vacancies/${vacancy.vacancyId}")
                         })
                     }
                 }

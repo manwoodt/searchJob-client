@@ -24,12 +24,9 @@ fun VacanciesScreen(viewModel: VacancyViewModel, onVacancyClick: (Int) -> Unit) 
     val errorMessage by viewModel.errorMessage.observeAsState(null)
 
     when {
-        isLoading ->
-            LoadingScreen()
-        errorMessage != null ->
-            ErrorScreen(errorMessage!!)
-        else ->
-            VacanciesList(vacancies, onVacancyClick)
+        isLoading -> LoadingScreen()
+        errorMessage != null -> ErrorScreen(errorMessage!!)
+        else -> VacanciesList(vacancies, onVacancyClick)
 
     }
 }
@@ -55,10 +52,10 @@ fun VacancyItem(vacancy: Vacancy, onVacancyClick: (Int) -> Unit) {
         modifier = Modifier
             .fillMaxSize()
             .padding(16.dp)
-            .clickable { onVacancyClick(vacancy.vacancyId)}
     ) {
         Text(
-            text = "Название - ${vacancy.profession}"
+            text = "Название - ${vacancy.profession}",
+            modifier = Modifier.clickable { onVacancyClick(vacancy.vacancyId) }
         )
         Text(
             text = "Уровень кандидата - ${vacancy.level}"

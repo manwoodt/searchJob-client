@@ -20,16 +20,16 @@ import com.course.domain.model.Company
 import com.course.ex1.viewmodel.CompanyViewModel
 
 @Composable
-fun CompaniesScreen(viewModel: CompanyViewModel, onCompanyClick: (Int)->Unit) {
+fun CompaniesScreen(viewModel: CompanyViewModel, onCompanyClick: (Int) -> Unit) {
     val companies by viewModel.companies.observeAsState(emptyList())
     val isLoading by viewModel.isLoading.observeAsState(false)
     val errorMessage by viewModel.errorMessage.observeAsState(null)
 
-when {
-    isLoading -> LoadingScreen()
-    errorMessage != null -> ErrorScreen(errorMessage!!)
-    else -> CompaniesList(companies, onCompanyClick)
-}
+    when {
+        isLoading -> LoadingScreen()
+        errorMessage != null -> ErrorScreen(errorMessage!!)
+        else -> CompaniesList(companies, onCompanyClick)
+    }
 }
 
 // Список компаний
@@ -41,13 +41,13 @@ fun CompaniesList(companies: List<Company>, onCompanyClick: (Int) -> Unit) {
             .padding(16.dp)
     ) {
         items(companies) { company ->
-            CompanyItem(company,onCompanyClick)
+            CompanyItem(company, onCompanyClick)
         }
     }
 }
+
 @Composable
 fun CompanyItem(company: Company, onCompanyClick: (Int) -> Unit) {
-    println(company.companyId)
     Text(
         text = "${company.name} - ${company.fieldOfActivity}",
         modifier = Modifier

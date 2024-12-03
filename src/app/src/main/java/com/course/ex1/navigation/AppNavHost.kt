@@ -31,11 +31,11 @@ fun AppNavHost(
             CompaniesScreen(
                 companyViewModel,
                 onCompanyClick = { companyId ->
-                    navController.navigate("companyInfo/$companyId")
+                    navController.navigate("companies/$companyId")
                 }
             )
         }
-        composable("companyInfo/{companyId}") { backStackEntry ->
+        composable("companies/{companyId}") { backStackEntry ->
             val companyDetailsViewModel:CompanyDetailsViewModel = hiltViewModel()
 
             val companyId = backStackEntry.arguments?.getString("companyId")?.toIntOrNull()
@@ -47,11 +47,13 @@ fun AppNavHost(
 
         composable("vacancies") {
             val vacancyViewModel: VacancyViewModel = hiltViewModel()
-            VacanciesScreen(vacancyViewModel, onVacancyClick = {vacancyId->
-                navController.navigate("vacancyDetails/{vacancyId}")
+            VacanciesScreen(
+                vacancyViewModel,
+                onVacancyClick = {vacancyId->
+                navController.navigate("vacancies/$vacancyId")
             }) }
 
-        composable("vacancyDetails/{vacancyId}") { backStackEntry ->
+        composable("vacancies/{vacancyId}") { backStackEntry ->
             val vacancyId = backStackEntry.arguments?.getString("vacancyId")?.toIntOrNull()
             if (vacancyId != null) {
                 VacancyDetailsScreen(navController, vacancyId)

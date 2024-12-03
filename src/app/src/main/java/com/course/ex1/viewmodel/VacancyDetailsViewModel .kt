@@ -19,11 +19,15 @@ import javax.inject.Inject
 
 @HiltViewModel
 class VacancyDetailsViewModel  @Inject constructor(
-    private val getVacancyDetailsUseCase: GetVacancyDetailsUseCase
+    private val getVacancyDetailsUseCase: GetVacancyDetailsUseCase,
+    private val getCompaniesUseCase: GetCompaniesUseCase
 ) : ViewModel() {
 
     private val _vacancyDetails = MutableLiveData<Vacancy>()
     val vacancyDetails: LiveData<Vacancy> = _vacancyDetails
+
+    private val _companies = MutableLiveData<List<Company>>()
+    val companies: LiveData<List<Company>> = _companies
 
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
@@ -38,6 +42,7 @@ class VacancyDetailsViewModel  @Inject constructor(
             _isLoading.value = true
             try {
                 _vacancyDetails.value = getVacancyDetailsUseCase(vacancyId)
+                _companies.value = getCompaniesUseCase()
             } catch (e: Exception) {
                 _errorMessage.value = "Error loading vacancy details ${e.message}"
             }
