@@ -6,7 +6,7 @@ import com.course.domain.model.Vacancy
 fun VacancyDto.toDomainModel(companyName :String = "Unknown"): Vacancy {
     return Vacancy(
         vacancyId = this.vacancyId,
-        profession = this.profession,
+        profession = this.profession.replaceFirstChar { it.uppercase() },
         level = this.level,
         salary = "${this.salary} ₽",
         description = this.description,

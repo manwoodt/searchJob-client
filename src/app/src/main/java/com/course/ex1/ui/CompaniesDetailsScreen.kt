@@ -1,36 +1,35 @@
 package com.course.ex1.ui
 
-import android.util.Log
-import android.widget.Toast
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.MaterialTheme
+import androidx.compose.foundation.shape.RoundedCornerShape
+
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
+import com.course.domain.model.CompanyDetails
+import com.course.domain.model.Vacancy
 import com.course.ex1.viewmodel.CompanyDetailsViewModel
-import com.course.ex1.viewmodel.VacancyDetailsViewModel
 
 
 @Composable
 fun CompanyDetailsScreen(
     navController: NavHostController,
     companyId: Int,
-    viewModel: CompanyDetailsViewModel = hiltViewModel()
+    viewModel: CompanyDetailsViewModel = hiltViewModel(),
 ) {
     val companyDetails by viewModel.companyDetails.observeAsState()
     val isLoading by viewModel.isLoading.observeAsState(false)
@@ -41,29 +40,117 @@ fun CompanyDetailsScreen(
         viewModel.loadCompanyDetails(companyId)
     }
 
-    if (isLoading) {
-        LoadingScreen()
-    } else if (errorMessage != null) {
-        Log.e("Error", errorMessage!!)
-        Toast.makeText(LocalContext.current, errorMessage, Toast.LENGTH_SHORT).show()
-    } else {
-     //   println("companyDetails внутри CompanyDetailsScreen $companyDetails")
-        companyDetails?.let { details ->
-            Column(modifier = Modifier.fillMaxSize().padding(16.dp)) {
-                Text(text = details.name, style = MaterialTheme.typography.bodyLarge)
-                Text(text = details.fieldOfActivity, style = MaterialTheme.typography.bodySmall)
-                Text(text = details.contacts, style = MaterialTheme.typography.bodyMedium)
-                Spacer(modifier = Modifier.height(16.dp))
-                Text(text = "Вакансии:", style = MaterialTheme.typography.bodyLarge)
-                LazyColumn {
-                    items(details.vacancies) { vacancy ->
-                        Text(text = vacancy.profession, modifier = Modifier.clickable {
-                            println("Id вакансии ${vacancy.vacancyId}")
-                            navController.navigate("vacancies/${vacancy.vacancyId}")
-                        })
-                    }
-                }
-            }
+    when {
+        isLoading -> LoadingScreen()
+        errorMessage != null -> ErrorScreen(errorMessage!!)
+        else -> companyDetails?.let { details ->
+            CompanyDetailsContent(details, onVacancyClick = { vacancyId ->
+                navController.navigate("vacancies/$vacancyId")
+            })
         }
+    }
+
+}
+
+@Composable
+fun CompanyDetailsContent(details: CompanyDetails, onVacancyClick: (Int) -> Unit) {
+    Box(
+        modifier = Modifier
+            .fillMaxSize(),
+
+        contentAlignment = Alignment.Center
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(24.dp)
+        ) {
+            CompanyHeader(details = details)
+            Spacer(modifier = Modifier.height(24.dp))
+            Text(
+                text = "Вакансии:",
+                fontSize = 24.sp,
+                fontWeight = FontWeight.Bold,
+                color = Color(0xFF0D47A1),
+                modifier = Modifier.padding(bottom = 4.dp)
+                    .align(Alignment.CenterHorizontally)
+            )
+            VacancyListFromCompany(
+                vacancies = details.vacancies,
+                onVacancyClick = onVacancyClick
+            )
+        }
+    }
+}
+
+@Composable
+fun CompanyHeader(details: CompanyDetails) {
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .background(
+                color = Color(0xFFECEFF1),
+                shape = RoundedCornerShape(12.dp)
+            )
+            .padding(24.dp)
+    ) {
+        Text(
+            text = details.name,
+            fontSize = 28.sp,
+            fontWeight = FontWeight.Bold,
+            color = Color(0xFF1E88E5),
+            modifier = Modifier.padding(bottom = 12.dp)
+                .align(Alignment.CenterHorizontally)
+        )
+        TextInfo("Сфера: ",details.fieldOfActivity)
+        TextInfo("Контакты: ",details.contacts)
+//        Text(
+//            text = "Сфера: ${details.fieldOfActivity}",
+//            fontSize = 18.sp,
+//            color = Color.Gray,
+//            modifier = Modifier.padding(bottom = 8.dp)
+//        )
+//        Text(
+//            text = "Контакты: ${details.contacts}",
+//            fontSize = 18.sp,
+//            color = Color.Gray
+//        )
+    }
+}
+
+@Composable
+fun VacancyListFromCompany(vacancies: List<Vacancy>, onVacancyClick: (Int) -> Unit) {
+    LazyColumn(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(top = 12.dp)
+    ) {
+        items(vacancies) { vacancy ->
+            VacancyNameItem(vacancy, onVacancyClick)
+        }
+    }
+}
+
+@Composable
+fun VacancyNameItem(vacancy: Vacancy, onVacancyClick: (Int) -> Unit) {
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(vertical = 8.dp)
+            .clickable { onVacancyClick(vacancy.vacancyId) }
+            .background(
+                color = Color(0xFFECEFF1),
+                shape = RoundedCornerShape(16.dp)
+            )
+            .padding(12.dp)
+    ) {
+        Text(
+            text = vacancy.profession,
+            fontSize = 24.sp,
+            fontWeight = FontWeight.Bold,
+            color = Color(0xFF0D47A1), // Темно-синий
+            modifier = Modifier.padding(bottom = 8.dp)
+        )
     }
 }

@@ -1,21 +1,28 @@
 package com.course.ex1.ui
 
 
-import android.widget.Toast
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Shadow
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.course.domain.model.Company
 import com.course.ex1.viewmodel.CompanyViewModel
 
@@ -32,7 +39,7 @@ fun CompaniesScreen(viewModel: CompanyViewModel, onCompanyClick: (Int) -> Unit) 
     }
 }
 
-// Список компаний
+
 @Composable
 fun CompaniesList(companies: List<Company>, onCompanyClick: (Int) -> Unit) {
     LazyColumn(
@@ -48,12 +55,30 @@ fun CompaniesList(companies: List<Company>, onCompanyClick: (Int) -> Unit) {
 
 @Composable
 fun CompanyItem(company: Company, onCompanyClick: (Int) -> Unit) {
-    Text(
-        text = "${company.name} - ${company.fieldOfActivity}",
+    Column(
         modifier = Modifier
-            .padding(8.dp)
-            .clickable { onCompanyClick(company.companyId) }
-    )
-
+            .fillMaxWidth()
+            .padding(12.dp) // Отступ вокруг карточки
+            .clickable { onCompanyClick(company.companyId) } // Весь элемент кликабелен
+            .background(
+                color = Color(0xFFF0F0F0), // Светлый фон для карточки
+                shape = RoundedCornerShape(8.dp) // Скругленные углы
+            )
+            .padding(16.dp) // Внутренние отступы внутри карточки
+    ) {
+        Text(
+            text = company.name,
+            fontSize = 24.sp,
+            fontWeight = FontWeight.Bold,
+            color = Color(0xFF1E88E5), // синий
+            modifier = Modifier.padding(bottom = 8.dp) // Отступ снизу
+        )
+        Text(
+            text = "Сфера деятельности: ${company.fieldOfActivity}",
+            fontSize = 16.sp,
+            fontStyle = FontStyle.Italic,
+            color = Color.Gray
+        )
+    }
 }
 

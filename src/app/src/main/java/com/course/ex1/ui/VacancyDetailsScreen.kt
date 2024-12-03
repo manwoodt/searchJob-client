@@ -1,13 +1,20 @@
 package com.course.ex1.ui
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
+import com.course.domain.model.Vacancy
 import com.course.ex1.viewmodel.VacancyDetailsViewModel
 
 @Composable
@@ -28,31 +35,82 @@ fun VacancyDetailsScreen(
     when {
         isLoading -> LoadingScreen()
         errorMessage != null -> ErrorScreen(errorMessage!!)
-        else ->
+        else -> {
             vacancyDetails?.let { details ->
-                Column(modifier = Modifier.padding(16.dp)) {
-                    Text(
-                        "Должность: ${details.profession}",
-                        style = MaterialTheme.typography.bodyLarge
-                    )
-                    Text("Описание: ${details.description}")
-                    Text("Зарплата: ${details.salary}")
-                    Text("Уровень: ${details.level}")
-                    Spacer(modifier = Modifier.height(16.dp))
-                    var companyId = 1
-                    for (company in companies!!) {
-                        if (company.name == details.companyName) {
-                            companyId = company.companyId
-                        }
-                    }
-                    Button(onClick = {
-                        navController.navigate(
-                            "companies/${companyId}"
-                        )
-                    }) {
-                        Text("Перейти в компанию: ${details.companyName}")
+                Box(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(20.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    VacancyItemNonClickable(vacancy = details) {
+                        val companyId = companies?.find { it.name == details.companyName }?.companyId ?: 1
+                        navController.navigate("companies/$companyId")
                     }
                 }
             }
+        }
+    }
+}
+
+@Composable
+fun VacancyItemNonClickable(vacancy: Vacancy, onButtonClick: () -> Unit) {
+    Column(
+        modifier = Modifier
+            .fillMaxWidth(0.9f)
+            .background(
+                color = Color(0xFFF0F0F0),
+                shape = RoundedCornerShape(8.dp)
+            )
+            .padding(28.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Text(
+            text = vacancy.profession,
+            fontSize = 28.sp,
+            fontWeight = FontWeight.Bold,
+            color = Color(0xFF0D47A1), // Тёмно-синий
+            modifier = Modifier
+                .padding(bottom = 16.dp)
+                .align(Alignment.CenterHorizontally)
+        )
+
+        TextInfo(label = "Уровень кандидата:", value = vacancy.level)
+        TextInfo(label = "Уровень зарплаты:", value = vacancy.salary)
+        TextInfo(label = "Описание:", value = vacancy.description)
+
+        Button(
+            onClick = onButtonClick,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = 12.dp),
+            colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF0D47A1))
+        ) {
+            Text(
+                text = vacancy.companyName,
+                fontSize = 18.sp,
+                color = Color.White
+            )
+        }
+    }
+}
+
+@Composable
+fun TextInfo(label: String, value: String) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(bottom = 12.dp),
+        horizontalArrangement = Arrangement.SpaceBetween
+    ) {
+        Text(
+            text = label,
+            fontSize = 20.sp,
+            color = Color.Gray
+        )
+        Text(
+            text = value,
+            fontSize = 20.sp
+        )
     }
 }

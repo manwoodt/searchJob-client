@@ -67,6 +67,8 @@ CompaniesScreen подписывается на LiveData через observeAsSta
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.tooling.preview.Preview
 import com.course.domain.usecase.GetCompaniesUseCase
 import com.course.ex1.ui.CompaniesScreen
 import com.course.ex1.ui.MyApp
@@ -89,3 +91,4 @@ class MainActivity : ComponentActivity() {
 
     }
 }
+

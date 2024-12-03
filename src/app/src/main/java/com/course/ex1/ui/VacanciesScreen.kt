@@ -1,17 +1,24 @@
 package com.course.ex1.ui
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.course.domain.model.Company
 import com.course.domain.model.Vacancy
 import com.course.ex1.viewmodel.VacancyViewModel
@@ -31,8 +38,6 @@ fun VacanciesScreen(viewModel: VacancyViewModel, onVacancyClick: (Int) -> Unit) 
     }
 }
 
-
-// Список компаний
 @Composable
 fun VacanciesList(vacancies: List<Vacancy>, onVacancyClick: (Int) -> Unit) {
     LazyColumn(
@@ -50,28 +55,44 @@ fun VacanciesList(vacancies: List<Vacancy>, onVacancyClick: (Int) -> Unit) {
 fun VacancyItem(vacancy: Vacancy, onVacancyClick: (Int) -> Unit) {
     Column(
         modifier = Modifier
-            .fillMaxSize()
+            .fillMaxWidth()
+            .padding(16.dp)
+            .clickable { onVacancyClick(vacancy.vacancyId) }
+            .background(
+                color = Color(0xFFF0F0F0),
+                shape = RoundedCornerShape(8.dp)
+            )
             .padding(16.dp)
     ) {
         Text(
-            text = "Название - ${vacancy.profession}",
-            modifier = Modifier.clickable { onVacancyClick(vacancy.vacancyId) }
+            text = vacancy.profession,
+            fontSize = 20.sp,
+            fontWeight = FontWeight.Bold,
+            color = Color(0xFF0D47A1), // тёмно-синий
+            modifier = Modifier.padding(bottom = 8.dp)
         )
         Text(
-            text = "Уровень кандидата - ${vacancy.level}"
+            text = "Уровень кандидата: ${vacancy.level}",
+            fontSize = 16.sp,
+            fontStyle = FontStyle.Italic,
+            color = Color.Gray,
+            modifier = Modifier.padding(bottom = 4.dp)
         )
         Text(
-            text = "Уровень зарплаты - ${vacancy.salary}"
+            text = "Уровень зарплаты: ${vacancy.salary}",
+            fontSize = 16.sp,
+            fontStyle = FontStyle.Italic,
+            color = Color.Gray,
+            modifier = Modifier.padding(bottom = 4.dp)
         )
         Text(
-            text = "Описание - ${vacancy.description}"
+            text = "Компания: ${vacancy.companyName}",
+            fontSize = 16.sp,
+            fontStyle = FontStyle.Italic,
+            color = Color(0xFF0D47A1),
         )
-        Text(
-            text = "компания - ${vacancy.companyName}"
-        )
-
     }
-
 }
 
-// represent vacancy title, candidate level, salary level, and company name
+
+
