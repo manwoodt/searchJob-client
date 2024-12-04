@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
-
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -104,17 +103,6 @@ fun CompanyHeader(details: CompanyDetails) {
         )
         TextInfo("Сфера: ",details.fieldOfActivity)
         TextInfo("Контакты: ",details.contacts)
-//        Text(
-//            text = "Сфера: ${details.fieldOfActivity}",
-//            fontSize = 18.sp,
-//            color = Color.Gray,
-//            modifier = Modifier.padding(bottom = 8.dp)
-//        )
-//        Text(
-//            text = "Контакты: ${details.contacts}",
-//            fontSize = 18.sp,
-//            color = Color.Gray
-//        )
     }
 }
 

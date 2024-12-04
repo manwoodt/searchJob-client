@@ -1,11 +1,10 @@
 package com.course.data.repository
-// тут чуть по-другому
+
 import com.course.data.mappers.toDomainModel
 import com.course.data.network.ApiService
 import com.course.domain.model.Company
 import com.course.domain.model.CompanyDetails
 import com.course.domain.model.Vacancy
-import com.course.domain.model.VacancyDetails
 import com.course.domain.repository.Repository
 import javax.inject.Inject
 
@@ -26,13 +25,11 @@ class RepositoryImpl @Inject constructor(
 
     override suspend fun getVacancies(): List<Vacancy> {
 
-        // Получаем список краткой информации о компаниях
         val companies = apiService.getCompanies()
-
-        // Получаем подробную информацию по каждой компании и добавляем вакансии с именами компаний
         val vacancies = mutableListOf<Vacancy>()
+
         for (company in companies) {
-            val companyDetails = getCompanyDetails(company.companyId) // Запрос подробной информации
+            val companyDetails = getCompanyDetails(company.companyId)
             vacancies.addAll(
                 companyDetails.vacancies.map { vacancy ->
                     vacancy.copy(companyName = companyDetails.name) // Добавляем имя компании в вакансию

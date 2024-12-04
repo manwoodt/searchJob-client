@@ -9,7 +9,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 
-// Экран загрузки
 @Composable
 fun LoadingScreen() {
     Box(
@@ -20,7 +19,6 @@ fun LoadingScreen() {
     }
 }
 
-// Экран ошибки
 @Composable
 fun ErrorScreen(errorMessage: String) {
     Toast.makeText(LocalContext.current, errorMessage, Toast.LENGTH_LONG).show()

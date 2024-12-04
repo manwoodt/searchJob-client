@@ -9,7 +9,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.course.domain.model.Company
 import com.course.domain.model.Vacancy
-import com.course.domain.model.VacancyDetails
 import com.course.domain.usecase.GetCompaniesUseCase
 import com.course.domain.usecase.GetVacanciesUseCase
 import com.course.domain.usecase.GetVacancyDetailsUseCase
@@ -36,7 +35,6 @@ class VacancyDetailsViewModel  @Inject constructor(
     val errorMessage: LiveData<String?> = _errorMessage
 
 
-    // Запрос данных через UseCase
     fun loadVacancyDetails(vacancyId:Int) {
         viewModelScope.launch {
             _isLoading.value = true

@@ -1,7 +1,6 @@
 package com.course.domain.usecase
 
 import com.course.domain.model.Vacancy
-import com.course.domain.model.VacancyDetails
 import com.course.domain.repository.Repository
 import javax.inject.Inject
 

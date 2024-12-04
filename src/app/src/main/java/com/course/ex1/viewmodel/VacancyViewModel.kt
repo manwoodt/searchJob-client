@@ -33,18 +33,13 @@ class VacancyViewModel @Inject constructor(
         loadVacancies()
     }
 
-    // Запрос данных через UseCase
     private fun loadVacancies() {
-        _isLoading.value = true
         viewModelScope.launch {
-
+            _isLoading.value = true
             try {
                 _vacancies.value = getVacanciesUseCase()
-                _errorMessage.value = null // Сбрасываем сообщение об ошибке
             } catch (e: Exception) {
-                _errorMessage.value = "Error loading vacancies ${e.message}"
-                Log.e("VacancyViewModel", "Error loading vacancies", e)
-                _vacancies.value = emptyList() // Ошибка, возвращаем пустой список
+                _errorMessage.value =e.message
             }
             finally {
                 _isLoading.value = false

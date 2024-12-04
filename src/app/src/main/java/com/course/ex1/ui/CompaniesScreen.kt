@@ -15,10 +15,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Shadow
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -59,10 +56,10 @@ fun CompanyItem(company: Company, onCompanyClick: (Int) -> Unit) {
         modifier = Modifier
             .fillMaxWidth()
             .padding(12.dp) // Отступ вокруг карточки
-            .clickable { onCompanyClick(company.companyId) } // Весь элемент кликабелен
+            .clickable { onCompanyClick(company.companyId) }
             .background(
-                color = Color(0xFFF0F0F0), // Светлый фон для карточки
-                shape = RoundedCornerShape(8.dp) // Скругленные углы
+                color = Color(0xFFF0F0F0),
+                shape = RoundedCornerShape(8.dp)
             )
             .padding(16.dp) // Внутренние отступы внутри карточки
     ) {
@@ -71,7 +68,7 @@ fun CompanyItem(company: Company, onCompanyClick: (Int) -> Unit) {
             fontSize = 24.sp,
             fontWeight = FontWeight.Bold,
             color = Color(0xFF1E88E5), // синий
-            modifier = Modifier.padding(bottom = 8.dp) // Отступ снизу
+            modifier = Modifier.padding(bottom = 8.dp)
         )
         Text(
             text = "Сфера деятельности: ${company.fieldOfActivity}",

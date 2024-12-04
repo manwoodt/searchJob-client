@@ -1,6 +1,5 @@
 package com.course.ex1.navigation
 
-import android.util.Log
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
@@ -17,9 +16,9 @@ import com.course.ex1.viewmodel.VacancyViewModel
 
 @Composable
 fun AppNavHost(
-    navController: NavHostController,
-    startDestination: String = "companies",
     modifier: Modifier = Modifier,
+    navController: NavHostController,
+    startDestination: String = "companies"
 ) {
     NavHost(
         navController,

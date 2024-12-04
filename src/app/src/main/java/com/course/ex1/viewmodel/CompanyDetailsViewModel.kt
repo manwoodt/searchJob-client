@@ -16,8 +16,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class CompanyDetailsViewModel @Inject constructor(
-    private val getCompanyDetailsUseCase: GetCompanyDetailsUseCase,
-  //  private val getVacanciesUseCase: GetVacanciesUseCase
+    private val getCompanyDetailsUseCase: GetCompanyDetailsUseCase
 ) : ViewModel() {
 
     private val _companyDetails = MutableLiveData<CompanyDetails>()
@@ -32,13 +31,11 @@ class CompanyDetailsViewModel @Inject constructor(
     private val _errorMessage = MutableLiveData<String?>()
     val errorMessage: LiveData<String?> = _errorMessage
 
-    // Запрос данных через UseCase
     fun loadCompanyDetails(companyId: Int) {
         viewModelScope.launch {
             _isLoading.value = true
             try {
                 _companyDetails.value = getCompanyDetailsUseCase(companyId)
-            //    _vacancies.value = getVacanciesUseCase()
             } catch (e: Exception) {
                 _errorMessage.value =e.message
             }

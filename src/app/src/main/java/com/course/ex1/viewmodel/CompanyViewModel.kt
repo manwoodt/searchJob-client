@@ -31,18 +31,13 @@ class CompanyViewModel @Inject constructor(
         loadCompanies()
     }
 
-    // Запрос данных через UseCase
     private fun loadCompanies() {
-        _isLoading.value = true
         viewModelScope.launch {
-
+            _isLoading.value = true
             try {
                 _companies.value = getCompaniesUseCase()
-                _errorMessage.value = null // Сбрасываем сообщение об ошибке
             } catch (e: Exception) {
-                _errorMessage.value = "Error loading companies ${e.message}"
-                Log.e("CompanyViewModel", "Error loading companies", e)
-                _companies.value = emptyList() // Ошибка, возвращаем пустой список
+                _errorMessage.value =e.message
             }
             finally {
                 _isLoading.value = false
