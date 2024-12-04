@@ -15,6 +15,8 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.course.domain.model.Vacancy
+import com.course.ex1.ui.theme.myBlueColor
+import com.course.ex1.ui.theme.myFleshColor
 import com.course.ex1.viewmodel.VacancyDetailsViewModel
 
 @Composable
@@ -57,9 +59,9 @@ fun VacancyDetailsScreen(
 fun VacancyItemNonClickable(vacancy: Vacancy, onButtonClick: () -> Unit) {
     Column(
         modifier = Modifier
-            .fillMaxWidth(0.9f)
+            .fillMaxWidth()
             .background(
-                color = Color(0xFFF0F0F0),
+                color = myFleshColor,
                 shape = RoundedCornerShape(8.dp)
             )
             .padding(28.dp),
@@ -69,7 +71,7 @@ fun VacancyItemNonClickable(vacancy: Vacancy, onButtonClick: () -> Unit) {
             text = vacancy.profession,
             fontSize = 28.sp,
             fontWeight = FontWeight.Bold,
-            color = Color(0xFF0D47A1), // Тёмно-синий
+            color = myBlueColor,
             modifier = Modifier
                 .padding(bottom = 16.dp)
                 .align(Alignment.CenterHorizontally)
@@ -84,7 +86,7 @@ fun VacancyItemNonClickable(vacancy: Vacancy, onButtonClick: () -> Unit) {
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(top = 12.dp),
-            colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF0D47A1))
+            colors = ButtonDefaults.buttonColors(containerColor =myBlueColor)
         ) {
             Text(
                 text = vacancy.companyName,

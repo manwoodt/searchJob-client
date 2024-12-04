@@ -21,6 +21,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.course.domain.model.Company
 import com.course.domain.model.Vacancy
+import com.course.ex1.ui.theme.myBlueColor
+import com.course.ex1.ui.theme.myFleshColor
 import com.course.ex1.viewmodel.VacancyViewModel
 
 
@@ -59,7 +61,7 @@ fun VacancyItem(vacancy: Vacancy, onVacancyClick: (Int) -> Unit) {
             .padding(16.dp)
             .clickable { onVacancyClick(vacancy.vacancyId) }
             .background(
-                color = Color(0xFFF0F0F0),
+                color = myFleshColor,
                 shape = RoundedCornerShape(8.dp)
             )
             .padding(16.dp)
@@ -68,7 +70,7 @@ fun VacancyItem(vacancy: Vacancy, onVacancyClick: (Int) -> Unit) {
             text = vacancy.profession,
             fontSize = 20.sp,
             fontWeight = FontWeight.Bold,
-            color = Color(0xFF0D47A1), // тёмно-синий
+            color = myBlueColor,
             modifier = Modifier.padding(bottom = 8.dp)
         )
         Text(
@@ -89,7 +91,7 @@ fun VacancyItem(vacancy: Vacancy, onVacancyClick: (Int) -> Unit) {
             text = "Компания: ${vacancy.companyName}",
             fontSize = 16.sp,
             fontStyle = FontStyle.Italic,
-            color = Color(0xFF0D47A1),
+            color = myBlueColor,
         )
     }
 }

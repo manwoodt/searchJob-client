@@ -21,6 +21,9 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.course.domain.model.CompanyDetails
 import com.course.domain.model.Vacancy
+import com.course.ex1.ui.theme.myBlueColor
+import com.course.ex1.ui.theme.myFleshColor
+import com.course.ex1.ui.theme.myLightBlueColor
 import com.course.ex1.viewmodel.CompanyDetailsViewModel
 
 
@@ -70,7 +73,7 @@ fun CompanyDetailsContent(details: CompanyDetails, onVacancyClick: (Int) -> Unit
                 text = "Вакансии:",
                 fontSize = 24.sp,
                 fontWeight = FontWeight.Bold,
-                color = Color(0xFF0D47A1),
+                color = myBlueColor,
                 modifier = Modifier.padding(bottom = 4.dp)
                     .align(Alignment.CenterHorizontally)
             )
@@ -88,7 +91,7 @@ fun CompanyHeader(details: CompanyDetails) {
         modifier = Modifier
             .fillMaxWidth()
             .background(
-                color = Color(0xFFECEFF1),
+                color = myFleshColor,
                 shape = RoundedCornerShape(12.dp)
             )
             .padding(24.dp)
@@ -97,7 +100,7 @@ fun CompanyHeader(details: CompanyDetails) {
             text = details.name,
             fontSize = 28.sp,
             fontWeight = FontWeight.Bold,
-            color = Color(0xFF1E88E5),
+            color = myLightBlueColor,
             modifier = Modifier.padding(bottom = 12.dp)
                 .align(Alignment.CenterHorizontally)
         )
@@ -128,7 +131,7 @@ fun VacancyNameItem(vacancy: Vacancy, onVacancyClick: (Int) -> Unit) {
             .padding(vertical = 8.dp)
             .clickable { onVacancyClick(vacancy.vacancyId) }
             .background(
-                color = Color(0xFFECEFF1),
+                color = myFleshColor,
                 shape = RoundedCornerShape(16.dp)
             )
             .padding(12.dp)
@@ -137,7 +140,7 @@ fun VacancyNameItem(vacancy: Vacancy, onVacancyClick: (Int) -> Unit) {
             text = vacancy.profession,
             fontSize = 24.sp,
             fontWeight = FontWeight.Bold,
-            color = Color(0xFF0D47A1), // Темно-синий
+            color = myBlueColor,
             modifier = Modifier.padding(bottom = 8.dp)
         )
     }

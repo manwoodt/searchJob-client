@@ -3,6 +3,7 @@ package com.course.ex1.ui
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Call
 import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
@@ -36,9 +37,8 @@ fun BottomNavigationBar(navController: NavHostController) {
             }
         )
 
-        // Пункт для "Вакансии"
         NavigationBarItem(
-            icon = { Icon(Icons.Filled.Call, contentDescription = null) },
+            icon = { Icon(Icons.Filled.Search, contentDescription = null) },
             label = { Text("Вакансии") },
             selected = currentRoute == "vacancies",
             onClick = {

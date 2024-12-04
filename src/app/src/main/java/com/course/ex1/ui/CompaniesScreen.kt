@@ -21,6 +21,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.course.domain.model.Company
+import com.course.ex1.ui.theme.myBlueColor
+import com.course.ex1.ui.theme.myFleshColor
+import com.course.ex1.ui.theme.myLightBlueColor
 import com.course.ex1.viewmodel.CompanyViewModel
 
 @Composable
@@ -58,7 +61,7 @@ fun CompanyItem(company: Company, onCompanyClick: (Int) -> Unit) {
             .padding(12.dp) // Отступ вокруг карточки
             .clickable { onCompanyClick(company.companyId) }
             .background(
-                color = Color(0xFFF0F0F0),
+                color = myFleshColor,
                 shape = RoundedCornerShape(8.dp)
             )
             .padding(16.dp) // Внутренние отступы внутри карточки
@@ -67,7 +70,7 @@ fun CompanyItem(company: Company, onCompanyClick: (Int) -> Unit) {
             text = company.name,
             fontSize = 24.sp,
             fontWeight = FontWeight.Bold,
-            color = Color(0xFF1E88E5), // синий
+            color = myLightBlueColor,
             modifier = Modifier.padding(bottom = 8.dp)
         )
         Text(
