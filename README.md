@@ -1,9 +1,10 @@
-# Job Finder App
+# Job Finder Client
 
-**Job Finder** — это учебное приложение, созданное для освоения современных технологий разработки Android-приложений, таких как Clean Architecture, Dependency Injection (Dagger2, Hilt), и работы с сетевыми запросами (Retrofit2, OkHttp).
+**Job Finder Client** — это учебное приложение, созданное для освоения современных технологий разработки Android-приложений, таких как Clean Architecture, Dependency Injection (Dagger2, Hilt), и работы с сетевыми запросами (Retrofit2, OkHttp).
 
 Приложение предоставляет удобный инструмент для поиска компаний и вакансий с возможностью детального просмотра информации и изучения вакансий.
 
+Для работы приложения требуется сервер: [Job Finder Server](https://github.com/manwoodt/searchJob-server).
 ---
 
 ## Основные возможности
