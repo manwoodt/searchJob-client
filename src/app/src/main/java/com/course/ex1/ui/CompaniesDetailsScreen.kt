@@ -59,7 +59,6 @@ fun CompanyDetailsContent(details: CompanyDetails, onVacancyClick: (Int) -> Unit
     Box(
         modifier = Modifier
             .fillMaxSize(),
-
         contentAlignment = Alignment.Center
     ) {
         Column(

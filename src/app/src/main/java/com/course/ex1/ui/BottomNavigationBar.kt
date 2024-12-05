@@ -29,9 +29,8 @@ fun BottomNavigationBar(navController: NavHostController) {
             selected = currentRoute == "companies",
             onClick = {
                 navController.navigate("companies") {
-                    popUpTo(navController.graph.startDestinationId) { saveState = true }
+                    popUpTo("companies") { inclusive  = true }
                     launchSingleTop = true
-                    restoreState = true
                 }
             }
         )
@@ -42,9 +41,8 @@ fun BottomNavigationBar(navController: NavHostController) {
             selected = currentRoute == "vacancies",
             onClick = {
                 navController.navigate("vacancies") {
-                    popUpTo(navController.graph.startDestinationId) { saveState = true }
+                    popUpTo("vacancies") { inclusive  = true }
                     launchSingleTop = true
-                    restoreState = true
                 }
             }
         )
